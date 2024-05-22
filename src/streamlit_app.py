@@ -5,24 +5,19 @@ from utils import ratings, movies, tags, links, svd_model, show_movie_info
 
 st.set_page_config(layout="wide")
 
-# Obtener las 10 películas mejor calificadas por el usuario
 def get_top_rated_movies(user_id, n=8):
     user_ratings = ratings[ratings['userId'] == user_id]
     top_rated_movies = user_ratings.sort_values(by='rating', ascending=False).head(n)
     return top_rated_movies
 
-# Interfaz de Streamlit
 st.title('Sistema de Recomendación de Películas')
 
-# Solicitar ID de usuario en la barra lateral
-user_id = st.sidebar.number_input('Ingrese su ID de usuario', min_value=1, step=1)
+user_id = st.sidebar.number_input('Enter user id', min_value=1, step=1)
 
-# Obtener las 10 películas mejor calificadas por el usuario
 top_rated_movies = get_top_rated_movies(user_id)
 
-st.subheader('Top Películas Mejor Calificadas por el Usuario')
+st.subheader('Top rated movies by this user')
 
-# Mostrar las 10 películas mejor calificadas por el usuario en forma de tarjetas
 num_cols = 4
 num_rows = (len(top_rated_movies) - 1) // num_cols + 1
 for i in range(num_rows):
@@ -30,12 +25,12 @@ for i in range(num_rows):
     for j in range(num_cols):
         index = i * num_cols + j
         if index < len(top_rated_movies):
-            movie_name, _, rating, _, poster_url = show_movie_info(user_id, top_rated_movies.iloc[index]['movieId'])
+            movie_name, genres, rating, _, poster_url = show_movie_info(user_id, top_rated_movies.iloc[index]['movieId'])
             if movie_name:
                 with cols[j]:
                     card(
                         title=movie_name,
-                        text=[f"Rating: {rating}"],
+                        text=[f"Rating: {rating}", f"{genres}"],
                         image=poster_url,
                         styles={
                             "card": {
@@ -50,7 +45,7 @@ for i in range(num_rows):
 
 show_pages(
     [
-        Page("streamlit_app.py", "Home"),
-        Page("recomendations.py", "Recomendaciones"),
+        Page("streamlit_app.py", "Top rated"),
+        Page("recomendations.py", "Recommendations"),
     ]
 )

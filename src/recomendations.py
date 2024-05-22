@@ -5,17 +5,24 @@ from utils import ratings, movies, tags, links, svd_model, show_movie_info
 
 st.set_page_config(layout="wide")
 
-user_id = st.sidebar.number_input('Ingrese su ID de usuario', min_value=1, step=1)
+user_id = st.sidebar.number_input('Enter user id', min_value=1, step=1)
 
-# Obtener las 5 películas con mejor predicción para el usuario
+st.title('Recommended movies for this user')
+
+
+
 def get_top_predicted_movies(user_id, n=12):
+    movies_not_rated = movies[~movies['movieId'].isin(ratings[ratings['userId'] == user_id]['movieId'])]
+
     predicted_ratings = []
-    for movie_id in movies['movieId'].unique():
+    for movie_id in movies_not_rated['movieId'].unique():
         prediction = svd_model.predict(user_id, movie_id)
         predicted_ratings.append({'movieId': movie_id, 'prediction': prediction.est})
+
     predicted_ratings_df = pd.DataFrame(predicted_ratings)
     top_predicted_movies = predicted_ratings_df.sort_values(by='prediction', ascending=False).head(n)
     return top_predicted_movies
+
 
 # Obtener las 5 películas con mejor predicción para el usuario
 top_predicted_movies = get_top_predicted_movies(user_id)
@@ -28,12 +35,12 @@ for i in range(num_rows):
     for j in range(num_cols):
         index = i * num_cols + j
         if index < len(top_predicted_movies):
-            movie_name, _, rating, _, poster_url = show_movie_info(user_id, top_predicted_movies.iloc[index]['movieId'])
+            movie_name, genres, _, prediction, poster_url = show_movie_info(user_id, top_predicted_movies.iloc[index]['movieId'])
             if movie_name:
                 with cols[j]:
                     card(
                         title=movie_name,
-                        text=[f"Rating: {rating}"],
+                        text=[f"Prediction: {prediction}", f"{genres}"],
                         image=poster_url,
                         styles={
                             "card": {
