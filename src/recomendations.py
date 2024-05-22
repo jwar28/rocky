@@ -9,8 +9,6 @@ user_id = st.sidebar.number_input('Enter user id', min_value=1, step=1)
 
 st.title('Recommended movies for this user')
 
-
-
 def get_top_predicted_movies(user_id, n=12):
     movies_not_rated = movies[~movies['movieId'].isin(ratings[ratings['userId'] == user_id]['movieId'])]
 

@@ -1,7 +1,7 @@
 import streamlit as st
-from st_pages import Page, show_pages
 from streamlit_card import card
 from utils import ratings, movies, tags, links, svd_model, show_movie_info
+from st_pages import Page, add_page_title, show_pages
 
 st.set_page_config(layout="wide")
 
