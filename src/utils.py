@@ -2,10 +2,10 @@ import pandas as pd
 import pickle
 from images import get_poster_image_url
 
-ratings_file_path = '../data/ratings.csv'
-movies_file_path = '../data/movies.csv'
-tags_file_path = '../data/tags.csv'
-links_file_path = '../data/links.csv'
+ratings_file_path = 'data/ratings.csv'
+movies_file_path = 'data/movies.csv'
+tags_file_path = 'data/tags.csv'
+links_file_path = 'data/links.csv'
 model_file_path = '../svd_model.pkl'
 
 ratings = pd.read_csv(ratings_file_path)
