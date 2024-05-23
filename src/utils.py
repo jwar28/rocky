@@ -1,20 +1,13 @@
-import streamlit as st
 import pandas as pd
-from st_pages import Page, show_pages, add_page_title
 import pickle
-import numpy as np
-from surprise import Dataset, Reader, SVD, accuracy
-from images import get_poster_image_url  # Importar la función para obtener la URL de la imagen del póster
-from streamlit_card import card  # Importar la función card de streamlit_card
+from images import get_poster_image_url
 
-# Ruta de los archivos CSV
 ratings_file_path = '../data/ratings.csv'
 movies_file_path = '../data/movies.csv'
 tags_file_path = '../data/tags.csv'
 links_file_path = '../data/links.csv'
 model_file_path = '../svd_model.pkl'
 
-# Cargar datos
 ratings = pd.read_csv(ratings_file_path)
 movies = pd.read_csv(movies_file_path)
 tags = pd.read_csv(tags_file_path)

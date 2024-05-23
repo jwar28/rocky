@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from streamlit_card import card
-from utils import ratings, movies, tags, links, svd_model, show_movie_info
+from utils import ratings, movies, svd_model, show_movie_info
 
 st.set_page_config(layout="wide")
 
@@ -22,10 +22,8 @@ def get_top_predicted_movies(user_id, n=12):
     return top_predicted_movies
 
 
-# Obtener las 5 películas con mejor predicción para el usuario
 top_predicted_movies = get_top_predicted_movies(user_id)
 
-# Mostrar las 5 películas con mejor predicción para el usuario en forma de tarjetas
 num_cols = 4
 num_rows = (len(top_predicted_movies) - 1) // num_cols + 1
 for i in range(num_rows):
