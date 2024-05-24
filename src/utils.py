@@ -1,12 +1,20 @@
 import pandas as pd
 import pickle
+import requests
+import io
+import zipfile
 from images import get_poster_image_url
 
-ratings_file_path = '/workspaces/rocky/data/ratings.csv'
-movies_file_path = '/workspaces/rocky/data/movies.csv'
-tags_file_path = '/workspaces/rocky/data/tags.csv'
-links_file_path = '/workspaces/rocky/data/links.csv'
-model_file_path = '/workspaces/rocky/svd_model.pkl'
+url = 'http://files.grouplens.org/datasets/movielens/ml-latest-small.zip'
+r = requests.get(url)
+with zipfile.ZipFile(io.BytesIO(r.content)) as z:
+    z.extractall()
+
+ratings_file_path = 'ml-latest-small/ratings.csv'
+movies_file_path = 'ml-latest-small/movies.csv'
+tags_file_path = 'ml-latest-small/tags.csv'
+links_file_path = 'ml-latest-small/links.csv'
+model_file_path = '../svd_model.pkl'
 
 ratings = pd.read_csv(ratings_file_path)
 movies = pd.read_csv(movies_file_path)
