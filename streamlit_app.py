@@ -47,6 +47,6 @@ for i in range(num_rows):
 show_pages(
     [
         Page("streamlit_app.py", "Top rated"),
-        Page("recomendations.py", "Recommendations"),
+        Page("src/recomendations.py", "Recommendations"),
     ]
 )
