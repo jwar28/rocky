@@ -2,7 +2,6 @@ import streamlit as st
 from streamlit_card import card
 from utils import ratings, show_movie_info
 from st_pages import Page, show_pages
-import os
 
 st.set_page_config(layout="wide")
 
@@ -47,6 +46,6 @@ for i in range(num_rows):
 show_pages(
     [
         Page("streamlit_app.py", "Top rated"),
-        Page("src/recomendations.py", "Recommendations"),
+        Page("recomendations.py", "Recommendations"),
     ]
 )
