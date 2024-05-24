@@ -3,7 +3,7 @@ from streamlit_card import card
 from utils import ratings, show_movie_info
 from st_pages import Page, show_pages
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", page_title="Rocky | Home")
 
 def get_top_rated_movies(user_id, n=8):
     user_ratings = ratings[ratings['userId'] == user_id]

@@ -3,7 +3,7 @@ import pandas as pd
 from streamlit_card import card
 from utils import ratings, movies, svd_model, show_movie_info
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", page_title="Rocky | Recommendations")
 
 user_id = st.sidebar.number_input('Enter user id', min_value=1, step=1)
 
