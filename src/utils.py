@@ -14,7 +14,7 @@ ratings_file_path = 'ml-latest-small/ratings.csv'
 movies_file_path = 'ml-latest-small/movies.csv'
 tags_file_path = 'ml-latest-small/tags.csv'
 links_file_path = 'ml-latest-small/links.csv'
-model_file_path = '../svd_model.pkl'
+model_file_path = 'svd_model.pkl'
 
 ratings = pd.read_csv(ratings_file_path)
 movies = pd.read_csv(movies_file_path)
