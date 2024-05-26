@@ -10,7 +10,7 @@ def get_top_rated_movies(user_id, n=8):
     top_rated_movies = user_ratings.sort_values(by='rating', ascending=False).head(n)
     return top_rated_movies
 
-st.title('Sistema de Recomendación de Películas')
+st.title('Movie Recommendation System')
 
 user_id = st.sidebar.number_input('Enter user id', min_value=1, step=1)
 
